@@ -1,11 +1,11 @@
 import os
 from flask import Flask, request, render_template, redirect, url_for, session, flash
 from PIL import Image
-from TlumaczOCRstronka.forms import ImageForm
-from TlumaczOCRstronka.services import get_translation, get_random_file_name
+from forms import ImageForm
+from services import get_translation, get_random_file_name
 
 app = Flask(__name__)
-app.secret_key = '6sd1fsd5f1sd3f1s5d1f2sdf'
+app.secret_key = '<secret key>'
 
 if os.path.isdir("static/temp_images") is False:
     os.mkdir("static/temp_images")
