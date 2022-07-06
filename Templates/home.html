@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div align="center">
+    <div class="jumbotron" align="center" style="width: 60%;margin-top: 30px; padding-top:30px;background-color:#f5ebe0;">
+      <h1 class="display-4">OCR Translator</h1>
+        <hr class="my-4">
+         <div style="width: 100%;">
+                {% with messages = get_flashed_messages(with_categories=true)%}
+                    {% if messages %}
+                        {% for category, message in messages%}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                 <span>Choose destination language</span>
+                 <div class="form-group">
+                    {% if form.lang_select.errors %}
+                        {{ form.country(class = 'form-control form-control-lg is-invalid') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.lang_select.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div style="width: 315px;">
+                            {{ form.lang_select(class = 'form-control') }}
+                        </div>
+                    {% endif %}
+                 </div>
+                <span>Upload file</span>
+                {% if form.image.errors %}
+                    {{ form.image(class = 'form-control is-invalid') }}
+                    <div class="invalid-feedback">
+                        {% for error in form.image.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div>
+                        {{ form.image()}}
+                    </div>
+                {% endif %}
+            </fieldset>
+            {{ form.submit(onmouseover="this.style.background='#e3d5ca';", onmouseout="this.style.background='#d5bdaf';")}}
+
+        </form>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    </div>
+</div>
+{% endblock %}

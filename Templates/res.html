@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div align="center">
+    <div class="jumbotron" style="width: 60%;margin-top: 30px;padding-bottom: 25px;padding-top: 0px;background-color:#f5ebe0;">
+        <div style="padding: 30px; text-align: left">
+            <a href="{{ url_for('home') }}"><- Return to main page</a>
+            <br>
+            <h1 class="display-4" style="text-align:left; font-size: 35px;">Result:</h1>
+            <hr style="width: 800px;">
+            <img id="myImg" src="{{ url_for('static', filename='temp_images/' + res_img_name) }}" width="800" height="500">
+            <br>
+            <h2 class="display-4" style="font-size: 30px;">Translated text:</h2>
+            <!--<p class="lead" style="font-size: 22px;">{{ translation }}</p>-->
+            <textarea readonly cols="106" rows="15" id="textarea">{{ translation }}</textarea>
+            <button onclick="copy()" class="btn btn-dark" style="background-color: #cb997e; color: black">Copy to clipboard</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+   <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+}
+
+// When the user clicks on <span> (x), close the modal
+modal.onclick = function() {
+    img01.className += " out";
+    setTimeout(function() {
+       modal.style.display = "none";
+       img01.className = "modal-content";
+     }, 400);
+
+ }
+
+function copy() {
+  let textarea = document.getElementById("textarea");
+  textarea.select();
+  document.execCommand("copy");
+}
+</script>
+
+{% endblock %}
